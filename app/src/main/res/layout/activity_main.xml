@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#E6AAA6"
+    android:orientation="vertical"
+    android:paddingLeft="10dp"
+    android:paddingTop="10dp"
+    android:paddingRight="10dp"
+    android:paddingBottom="10dp">
+
+    <EditText
+        android:id="@+id/fp_result"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_gravity="left"
+        android:gravity="bottom"
+        android:hint="The result will be shown here"
+        android:textSize="26sp" />
+
+    <Button
+        android:id="@+id/btn_clear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="#E3F34D"
+        android:text="清除"
+        android:textSize="26sp"
+        app:backgroundTint="#4457BC" />
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:columnCount="4"
+        android:rowCount="4">
+
+        <Button
+            android:id="@+id/btn_1"
+            android:text="@string/btn_1"
+            android:textSize="26sp"
+            app:backgroundTint="#4457BC" />
+
+        <Button
+            android:id="@+id/btn_2"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_2"
+            android:textSize="26sp"
+            app:backgroundTint="#4457BC" />
+
+        <Button
+            android:id="@+id/btn_3"
+            android:text="@string/btn_3"
+            android:textSize="26sp"
+            app:backgroundTint="#4457BC" />
+
+        <Button
+            android:id="@+id/btn_add"
+            android:text="@string/btn_add"
+            android:textSize="26sp"
+            app:backgroundTint="#8F5698" />
+
+        <Button
+            android:id="@+id/btn_4"
+            android:text="@string/btn_4"
+            android:textSize="26sp"
+            app:backgroundTint="#4457BC" />
+
+        <Button
+            android:id="@+id/btn_5"
+            android:text="@string/btn_5"
+            android:textSize="26sp"
+            app:backgroundTint="#4457BC" />
+
+        <Button
+            android:id="@+id/btn_6"
+            android:text="@string/btn_6"
+            android:textSize="26sp"
+            app:backgroundTint="#4457BC" />
+
+        <Button
+            android:id="@+id/btn_sub"
+            android:text="@string/btn_sub"
+            android:textSize="26sp"
+            app:backgroundTint="#8F5698" />
+
+        <Button
+            android:id="@+id/btn_7"
+            android:text="@string/btn_7"
+            android:textSize="26sp"
+            app:backgroundTint="#4457BC" />
+
+        <Button
+            android:id="@+id/btn_8"
+            android:text="@string/btn_8"
+            android:textSize="26sp"
+            app:backgroundTint="#4457BC" />
+
+        <Button
+            android:id="@+id/btn_9"
+            android:text="@string/btn_9"
+            android:textSize="26sp"
+            app:backgroundTint="#4457BC" />
+
+        <Button
+            android:id="@+id/btn_mul"
+            android:text="@string/btn_mul"
+            android:textSize="26sp"
+            app:backgroundTint="#8F5698" />
+
+        <Button
+            android:id="@+id/btn_dot"
+            android:text="@string/btn_dot"
+            android:textSize="26sp"
+            app:backgroundTint="#8F5698" />
+
+        <Button
+            android:id="@+id/btn_0"
+            android:text="@string/btn_0"
+            android:textSize="26sp"
+            app:backgroundTint="#4457BC" />
+
+        <Button
+            android:id="@+id/btn_equ"
+            android:text="@string/btn_equ"
+            android:textSize="26sp"
+            app:backgroundTint="#8F5698" />
+
+        <Button
+            android:id="@+id/btn_div"
+            android:text="@string/btn_div"
+            android:textSize="26sp"
+            app:backgroundTint="#8F5698" />
+
+    </GridLayout>
+
+    <Button
+        android:text="@string/btn_openCfg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:onClick="openOne"
+        android:id="@+id/btn_opencfg"
+        app:backgroundTint="#DA4A3F" />
+
+    <Button
+        android:id="@+id/btn_save2"
+        android:layout_width="387dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="save"
+        app:backgroundTint="#DA4A3F"/>
+
+</LinearLayout>
