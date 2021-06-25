@@ -18,9 +18,10 @@ import android.widget.SpinnerAdapter;
 import org.w3c.dom.Document;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener,Runnable {
 
     private static final String TAG = "MainActivity";
     Button btn1;
@@ -41,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button equ;
     Button clear;
     EditText result;
-    float finalresult;
+    EditText finalResult;
 
     double num1 = 0, num2 = 0;
     double Result = 0;
@@ -53,12 +54,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        SharedPreferences sharedPreferences = getSharedPreferences("myrate", Activity.MODE_PRIVATE);
+        Intent conf = getIntent();
+        float result = conf.getFloatExtra("thefinalresult", 100f);
 
-        finalresult = sharedPreferences.getFloat("finalResult",0.0f);
+
+        Log.i(TAG, "onCreate: result=" + result);
 
 
-        Log.i(TAG, "onCreate: sp dollarRate=" + finalresult);
+        finalResult = findViewById(R.id.fp_result);
+
+        finalResult.setText(String.valueOf(result));
 
 
         // 获取页面上的控件
@@ -79,25 +84,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         equ = findViewById(R.id.btn_equ);
         dot = findViewById(R.id.btn_dot);
         clear = findViewById(R.id.btn_clear);
-        result = findViewById(R.id.fp_result);
+        finalResult = (EditText) findViewById(R.id.fp_result);
 
-        Button btn0 = (Button)findViewById(R.id.btn_0);
-        Button btn1 = (Button)findViewById(R.id.btn_1);
-        Button btn2 = (Button)findViewById(R.id.btn_2);
-        Button btn3 = (Button)findViewById(R.id.btn_3);
-        Button btn4 = (Button)findViewById(R.id.btn_4);
-        Button btn5 = (Button)findViewById(R.id.btn_5);
-        Button btn6 = (Button)findViewById(R.id.btn_6);
-        Button btn7 = (Button)findViewById(R.id.btn_7);
-        Button btn8 = (Button)findViewById(R.id.btn_8);
-        Button btn9 = (Button)findViewById(R.id.btn_9);
-        Button add = (Button)findViewById(R.id.btn_add);
-        Button sub = (Button)findViewById(R.id.btn_sub);
-        Button mul = (Button)findViewById(R.id.btn_mul);
-        Button div = (Button)findViewById(R.id.btn_div);
-        Button equ = (Button)findViewById(R.id.btn_equ);
-        Button dot = (Button)findViewById(R.id.btn_dot);
-        Button clear = (Button)findViewById(R.id.btn_clear);
+        Button btn0 = (Button) findViewById(R.id.btn_0);
+        Button btn1 = (Button) findViewById(R.id.btn_1);
+        Button btn2 = (Button) findViewById(R.id.btn_2);
+        Button btn3 = (Button) findViewById(R.id.btn_3);
+        Button btn4 = (Button) findViewById(R.id.btn_4);
+        Button btn5 = (Button) findViewById(R.id.btn_5);
+        Button btn6 = (Button) findViewById(R.id.btn_6);
+        Button btn7 = (Button) findViewById(R.id.btn_7);
+        Button btn8 = (Button) findViewById(R.id.btn_8);
+        Button btn9 = (Button) findViewById(R.id.btn_9);
+        Button add = (Button) findViewById(R.id.btn_add);
+        Button sub = (Button) findViewById(R.id.btn_sub);
+        Button mul = (Button) findViewById(R.id.btn_mul);
+        Button div = (Button) findViewById(R.id.btn_div);
+        Button equ = (Button) findViewById(R.id.btn_equ);
+        Button dot = (Button) findViewById(R.id.btn_dot);
+        Button clear = (Button) findViewById(R.id.btn_clear);
 
 
         btn0.setOnClickListener(this);
@@ -119,10 +124,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         clear.setOnClickListener(this);
 
 
-
-
-
-        /* 按钮的单击事件
+        //按钮的单击事件
         btn1.setOnClickListener(new Click());
         btn2.setOnClickListener(new Click());
         btn3.setOnClickListener(new Click());
@@ -140,14 +142,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         equ.setOnClickListener(new Click());
         dot.setOnClickListener(new Click());
         clear.setOnClickListener(new Click());
-        result.setOnClickListener(new Click());
-
-         */
 
     }
 
     @Override
     public void onClick(View v) {
+
+    }
+
+    @Override
+    public void run() {
+        Thread t = new Thread(this);//创建新线程
+        t.start();//开启线程
+
+        Log.i("thread","run.....");
+        boolean marker = false;
+        List<HashMap<String,String>> resultList = new ArrayList<HashMap<String ,String>>();
+
 
     }
 
@@ -293,38 +304,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-    public void open() {
-        open();
-    }
+    public void openOne(View btn) {
+        Intent config = new Intent(this, ConfigActivity.class);
+        config.putExtra("fp_result", Result);
 
-    public void openOne(View btn){
-        Intent config = new Intent(this,ConfigActivity.class);
-        config.putExtra("fp_result",finalresult);
-
-        Log.i(TAG, "openOne:finalResult" + finalresult);
+        Log.i(TAG, "openOne:finalResult" + finalResult);
 
         //startActivity(config);
-        startActivityForResult(config,1);
+        startActivityForResult(config, 1);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(requestCode==1 && resultCode==2) {
+        if (requestCode == 1 && resultCode == 2) {
 
             Bundle bundle = data.getExtras();
-            finalresult = bundle.getFloat("finalresult", 0);
-            Log.i(TAG, "onActivityResult: finalresult=" + finalresult);
+            Result = bundle.getFloat("finalresult", 0);
+            Log.i(TAG, "onActivityResult: finalresult=" + finalResult);
 
-            //将新设置的结果写到SP里
-            SharedPreferences sharedPreferences = getSharedPreferences("myrate", Activity.MODE_PRIVATE);
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putFloat("finalResult",finalresult);
 
-            editor.commit();
             Log.i(TAG, "onActivityResult: 数据已保存到sharedPreferences");
+
+
+            super.onActivityResult(requestCode, resultCode, data);
         }
-
-        super.onActivityResult(requestCode, resultCode, data);
     }
-
 }

@@ -27,7 +27,7 @@ public class ConfigActivity extends AppCompatActivity {
         resultText = (EditText)findViewById(R.id.fp_result);
 
         //显示数据到控件
-        //resultText.setText(String.valueOf(finalresult));
+        resultText.setText(String.valueOf(finalresult));
 
         Log.i(TAG, "save: ");
 
