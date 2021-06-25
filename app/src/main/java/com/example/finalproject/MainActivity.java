@@ -65,6 +65,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         finalResult.setText(String.valueOf(result));
 
+        SharedPreferences sharedPreferences = getSharedPreferences("myresult", Activity.MODE_PRIVATE);
+
 
         // 获取页面上的控件
         btn0 = findViewById(R.id.btn_0);

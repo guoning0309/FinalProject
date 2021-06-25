@@ -15,6 +15,8 @@ import android.widget.SimpleAdapter;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.xml.transform.Result;
+
 public class ResultListActivity extends ListActivity {
 
 
