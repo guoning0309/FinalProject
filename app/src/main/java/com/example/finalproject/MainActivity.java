@@ -3,8 +3,10 @@ package com.example.finalproject;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -14,6 +16,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
+import android.widget.Toast;
 
 import org.w3c.dom.Document;
 
@@ -330,5 +333,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             super.onActivityResult(requestCode, resultCode, data);
         }
+    }
+    
+    public void testCreateDB(View view){
+        DBHelper dbHelper = new DBHelper(this,1);
+        //获取连接
+        SQLiteDatabase sqLiteDatabase = dbHelper.getReadableDatabase();
+
+        Toast.makeText(this,"创建数据库",Toast.LENGTH_SHORT).show();
+    }
+    
+    //插入数据
+    public void testInsertDate(View view){
+        DBHelper dbHelper = new DBHelper(this,2);
+        
+        SQLiteDatabase sqLiteDatabase = dbHelper.getReadableDatabase();
+        
+        //执行insert
+        ContentValues values = new ContentValues();
+
+        long id = sqLiteDatabase.insert("person",null,values);
+
+        //关闭连接
+        sqLiteDatabase.close();
+
+        Toast.makeText(this,"id=" + id,Toast.LENGTH_SHORT).show();
+
     }
 }

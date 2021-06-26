@@ -18,9 +18,8 @@ public class DBHelper extends SQLiteOpenHelper {
                  "Result)";
                  private Context mContext;
 
-    public DBHelper(Context context, String name,
-                    SQLiteDatabase.CursorFactory factory, int version){
-        super(context,name,factory,version);
+    public DBHelper(Context context, int version){
+        super(context,"myresult.db",null,version);
         mContext=context;
 
     }
